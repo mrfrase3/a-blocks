@@ -1,6 +1,7 @@
 
 .idea/
 build.js
+package-lock.json
 
 ### Node template
 # Logs
