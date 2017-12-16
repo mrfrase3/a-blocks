@@ -1,0 +1,48 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* General */
+}
+
+body > div {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    float: left;
+}
+
+.gutter {
+    background: grey;
+}
+
+.gutter.gutter-horizontal {
+    cursor: e-resize;
+}
+
+.gutter.gutter-vertical {
+    cursor: n-resize;
+}
+
+
+/* make materialize and blockly get along */
+.blocklyHtmlInput {
+    background-color: white!important;
+    border: none!important;
+    border-radius: 4px!important;
+    font-family: sans-serif!important;
+    height: 100%!important;
+    margin: 0!important;
+    outline: none!important;
+    padding: 0 1px!important;
+    width: 100%!important;
+}
+
+.blocklyDropdownMenu {
+    -webkit-box-sizing: initial!important;
+    box-sizing: initial!important;
+}

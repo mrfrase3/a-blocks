@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A-Blocks</title>
+    <script src="build.js"></script>
+</head>
+<body>
+<div id="left-view">
+    <div id="left-view-top">
+        <a-scene embedded>
+            <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+            <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+            <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+            <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+            <a-sky color="#ECECEC"></a-sky>
+        </a-scene>
+    </div>
+    <div id="left-view-bottom">
+        <ul class="tabs">
+            <li class="tab"><a href="#test1">Test 1</a></li>
+            <li class="tab"><a class="active" href="#test2">Test 2</a></li>
+            <li class="tab"><a href="#test3">Disabled Tab</a></li>
+            <li class="tab"><a href="#test4">Test 4</a></li>
+        </ul>
+        <div class="divider"></div>
+        <div class="row">
+            <div id="test1" class="col s12">Test 1</div>
+            <div id="test2" class="col s12">Test 2</div>
+            <div id="test3" class="col s12">Test 3</div>
+            <div id="test4" class="col s12">Test 4</div>
+        </div>
+    </div>
+</div>
+<div id="right-view">
+    <div id="blocklyDiv" style="position: absolute"></div>
+</div>
+</body>
+</html>
