@@ -9,26 +9,22 @@
 <div id="left-view">
     <div id="left-view-top">
         <a-scene embedded>
-            <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-            <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-            <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+            <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" scene-panel="name:Box;"></a-box>
+            <a-sphere position="0 1.25 -5" radius="1.25" material="src:url(./assets/img/moon.jpg)" scene-panel="name:Moon;"></a-sphere>
+            <a-cylinder position="-0.8 1.25 -3" radius="0.2" height="0.5" material="src:url(./assets/img/soup.jpg)" scene-panel="name:Can;" rotation="0 225 0"></a-cylinder>
             <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
             <a-sky color="#ECECEC"></a-sky>
         </a-scene>
     </div>
     <div id="left-view-bottom">
-        <ul class="tabs">
-            <li class="tab"><a href="#test1">Test 1</a></li>
-            <li class="tab"><a class="active" href="#test2">Test 2</a></li>
-            <li class="tab"><a href="#test3">Disabled Tab</a></li>
-            <li class="tab"><a href="#test4">Test 4</a></li>
+        <ul class="scene-tabs tabs">
+            <li class="tab"><a href="#scene-tab-env">World</a></li>
+            <li class="tab"><a class="active" href="#scene-tab-obj">Things</a></li>
         </ul>
         <div class="divider"></div>
         <div class="row">
-            <div id="test1" class="col s12">Test 1</div>
-            <div id="test2" class="col s12">Test 2</div>
-            <div id="test3" class="col s12">Test 3</div>
-            <div id="test4" class="col s12">Test 4</div>
+            <div id="scene-tab-env" class="col s12"></div>
+            <div id="scene-tab-obj" class="col s12"></div>
         </div>
     </div>
 </div>

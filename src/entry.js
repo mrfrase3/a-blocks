@@ -8,17 +8,8 @@ require('./main.css');
 
 require('./split-init.js');
 
-require('./aframe-init.js');
+require('./aframe/aframe-init.js');
 
 require('./blockly/blockly-init.js');
 
-
-$(document).ready(function(){
-  var $tabs = $('ul.tabs');
-  $tabs.tabs();//{swipeable: true });
-  var onresize = function(e) {
-    $tabs.trigger('resize');
-  };
-  window.addEventListener('resize', onresize, false);
-  window.splitEvents.onDrag.push(onresize);
-});
+require('./scene-panel/scene-panel-init.js');

@@ -28,6 +28,13 @@ body > div {
     cursor: n-resize;
 }
 
+.obj-preview {
+    width: 100%;
+}
+
+#left-view-bottom {
+    overflow-y: auto;
+}
 
 /* make materialize and blockly get along */
 .blocklyHtmlInput {
