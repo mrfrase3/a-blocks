@@ -26,7 +26,7 @@ AFRAME.registerComponent('scene-panel', {
 $(document).ready(function(){
 
   const $tabs = $('ul.scene-tabs');
-  $tabs.tabs();//{swipeable: true });
+
   const onresize = function(e) {
     for(let i in previews) previews[i].resize();
     $tabs.trigger('resize');
@@ -34,5 +34,8 @@ $(document).ready(function(){
   window.addEventListener('resize', onresize, false);
   window.splitEvents.onDrag.push(onresize);
   onresize();
-
+  $tabs.tabs({
+    //swipeable: true,
+    onShow: onresize
+  });
 });

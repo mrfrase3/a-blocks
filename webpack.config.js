@@ -1,15 +1,16 @@
 const webpack = require('webpack');
 const path = require("path");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const PLUGINS = [
   // materialize dependency
   new webpack.ProvidePlugin({
-    $: "jquery",
-    jQuery: "jquery"
+    $: "jquery/dist/jquery.min.js",
+    jQuery: "jquery/dist/jquery.min.js"
   })
 ];
 if (process.env.NODE_ENV === 'production') {
-  PLUGINS.push(new webpack.optimize.UglifyJsPlugin());
+  PLUGINS.push(new UglifyJsPlugin());
 }
 
 module.exports = {
