@@ -1,32 +1,55 @@
 
 const Blockly = require('node-blockly/browser');
 
-$(document).ready(function () {
+export class BlocklyObj {
+  constructor(id, name) {
 
-  var blocklyArea = document.getElementById('right-view');
-  var blocklyDiv = document.getElementById('blocklyDiv');
+    this.id = id;
+    this.name = name;
+    this.$blocklyArea =$('#right-view');
+    this.$blocklyDiv = $('<div id="blocklyDiv-'+this.id+'" style="position: absolute"></div>');
+    this.$blocklyArea.append(this.$blocklyDiv);
 
-  var onresize = function(e) {
+    this.blocklyArea = this.$blocklyArea.get(0);
+    this.blocklyDiv = this.$blocklyDiv.get(0);
+
+
+    window.addEventListener('resize', ()=>this.onresize(), false);
+    window.splitEvents.onDrag.push(()=>this.onresize());
+
+    this.workspace = Blockly.inject(this.blocklyDiv,
+      {toolbox: require('./toolbox.xml').replace('{{name}}', this.name)});
+    //Blockly.svgResize(this.workspace);
+    this.hide();
+  }
+
+  show(){
+    $('#right-view > div').hide();
+    this.$blocklyDiv.show();
+    requestAnimationFrame(()=>this.onresize());
+  }
+
+  hide(){
+    this.$blocklyDiv.hide();
+    $('#blocklyNoSelect').show();
+  }
+
+  onresize(e) {
     // Compute the absolute coordinates and dimensions of blocklyArea.
-    var element = blocklyArea;
-    var x = 0;
-    var y = 0;
+    let element = this.blocklyArea;
+    let x = 0;
+    let y = 0;
     do {
       x += element.offsetLeft;
       y += element.offsetTop;
       element = element.offsetParent;
     } while (element);
     // Position blocklyDiv over blocklyArea.
-    blocklyDiv.style.left = x + 'px';
-    blocklyDiv.style.top = y + 'px';
-    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-    blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-  };
-  window.addEventListener('resize', onresize, false);
-  window.splitEvents.onDrag.push(onresize);
+    this.blocklyDiv.style.left = x + 'px';
+    this.blocklyDiv.style.top = y + 'px';
+    this.blocklyDiv.style.width = this.blocklyArea.offsetWidth + 'px';
+    this.blocklyDiv.style.height = this.blocklyArea.offsetHeight + 'px';
 
-  var workspacePlayground = Blockly.inject(blocklyDiv,
-    {toolbox: require('./toolbox.xml')});
-  onresize();
-  Blockly.svgResize(workspacePlayground);
-});
+    Blockly.svgResize(this.workspace);
+  };
+}

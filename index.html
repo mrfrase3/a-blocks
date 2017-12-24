@@ -3,33 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>A-Blocks</title>
-    <script src="build.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" integrity="sha256-e22BQKCF7bb/h/4MFJ1a4lTRR2OuAe8Hxa/3tgU5Taw=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <style>.loader{background-color:white;width:100vw;height:100vh;position: fixed;z-index:99999;top:0;left:0;transition:height 0.35s ease-out;overflow-y:hidden;}.loader .loader-center {position:absolute;left:50%;top:50%;transform:translateX(-50%) translateY(-50%);}</style>
 </head>
 <body>
-<div id="left-view">
-    <div id="left-view-top">
-        <a-scene embedded>
-            <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" scene-panel="name:Box;"></a-box>
-            <a-sphere position="0 1.25 -5" radius="1.25" material="src:url(./assets/img/moon.jpg)" scene-panel="name:Moon;"></a-sphere>
-            <a-cylinder position="-0.8 1.25 -3" radius="0.2" height="0.5" material="src:url(./assets/img/soup.jpg)" scene-panel="name:Can;" rotation="0 225 0"></a-cylinder>
-            <a-plane position="0 0 -4" rotation="-90 0 0" width="40" height="40" color="#7BC8A4" scene-panel="name:Ground;type:env;"></a-plane>
-            <a-sky color="#ECECEC" radius="100" scene-panel="name:Sky;type:env;" src="./assets/img/galaxy.jpg"></a-sky>
-        </a-scene>
-    </div>
-    <div id="left-view-bottom">
-        <ul class="scene-tabs tabs">
-            <li class="tab"><a href="#scene-tab-env">World</a></li>
-            <li class="tab"><a class="active" href="#scene-tab-obj">Things</a></li>
-        </ul>
-        <div class="divider"></div>
-        <div class="row">
-            <div id="scene-tab-env" class="col s12"></div>
-            <div id="scene-tab-obj" class="col s12"></div>
+    <div id="left-view">
+        <div id="left-view-top">
+            <a-scene embedded>
+                <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" scene-panel="name:Box;"></a-box>
+                <a-sphere position="0 1.25 -5" radius="1.25" material="src:url(./assets/img/moon.jpg)" scene-panel="name:Moon;"></a-sphere>
+                <a-cylinder position="-0.8 1.25 -3" radius="0.2" height="0.5" material="src:url(./assets/img/soup.jpg)" scene-panel="name:Can;" rotation="0 225 0"></a-cylinder>
+                <a-plane position="0 0 -4" rotation="-90 0 0" width="40" height="40" color="#7BC8A4" scene-panel="name:Ground;type:env;"></a-plane>
+                <a-sky color="#ECECEC" radius="100" scene-panel="name:Sky;type:env;" src="./assets/img/galaxy.jpg"></a-sky>
+            </a-scene>
+        </div>
+        <div id="left-view-bottom">
+            <ul class="scene-tabs tabs">
+                <li class="tab"><a href="#scene-tab-env">World</a></li>
+                <li class="tab"><a class="active" href="#scene-tab-obj">Things</a></li>
+            </ul>
+            <div class="divider"></div>
+            <div class="row">
+                <div id="scene-tab-env" class="col s12"></div>
+                <div id="scene-tab-obj" class="col s12"></div>
+            </div>
         </div>
     </div>
-</div>
-<div id="right-view">
-    <div id="blocklyDiv" style="position: absolute"></div>
-</div>
+    <div id="right-view">
+        <div id="blocklyNoSelect">Nothing Selected</div>
+    </div>
+    <div class="loader"><div class="loader-center"><div class="preloader-wrapper big active"><div class="spinner-layer spinner-blue-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div></div></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js" integrity="sha256-uWtSXRErwH9kdJTIr1swfHFJn/d/WQ6s72gELOHXQGM=" crossorigin="anonymous"></script>
+    <script src="build.js"></script>
 </body>
 </html>

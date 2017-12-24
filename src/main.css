@@ -28,12 +28,23 @@ body > div {
     cursor: n-resize;
 }
 
+#left-view-bottom .row > div .active .card-content {
+    background: lightblue;
+}
+
 .obj-preview {
     width: 100%;
 }
 
 #left-view-bottom {
     overflow-y: auto;
+}
+
+.card-content > i {
+    cursor: pointer;
+}
+.card-content > i:hover {
+    color: gray;
 }
 
 /* make materialize and blockly get along */

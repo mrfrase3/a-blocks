@@ -1,4 +1,6 @@
 <xml id="toolbox" style="display: none">
+    <category web-class="toolbox-name" name="{{name}}" disabled="true"></category>
+    <sep></sep>
     <category id="catLogic" colour="210" name="Logic">
         <block type="controls_if"></block>
         <block type="logic_compare"></block>
