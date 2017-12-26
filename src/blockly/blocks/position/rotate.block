@@ -1,0 +1,11 @@
+(function(){
+  var degrees = ({{{degrees}}});
+  var dir = {{{dir}}};
+  if(dir === 'L' || dir === 'D' || dir === 'B') degrees = degrees*-1;
+  var rot = this.el.components.rotation.data;
+  if(dir === 'L' || dir === 'R' || dir === 'Y') rot.y {{#if rotRelative}}+{{/if}}= degrees;
+  if(dir === 'U' || dir === 'D' || dir === 'X') rot.x {{#if rotRelative}}+{{/if}}= degrees;
+  if(dir === 'B' || dir === 'F' || dir === 'Z') rot.z {{#if rotRelative}}+{{/if}}= degrees;
+
+  this.el.setAttribute('rotation', rot.x +' '+ rot.y +' '+ rot.z);
+}).apply(this);

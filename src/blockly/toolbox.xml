@@ -1,6 +1,39 @@
 <xml id="toolbox" style="display: none">
     <category web-class="toolbox-name" name="{{name}}" disabled="true"></category>
     <sep></sep>
+    <category id="catEvents" colour="40" name="Events">
+        <block type="aframeevent_tick"></block>
+    </category>
+    <category id="catPos" colour="240" name="Position">
+        <block type="position_move">
+            <value name="DIRECTION">
+                <block type="position_direction">
+                    <field name="DIRECTION">F</field>
+                </block>
+            </value>
+            <value name="STEPS">
+                <block type="math_number">
+                    <field name="NUM">10</field>
+                </block>
+            </value>
+        </block>
+        <block type="position_rotate">
+            <value name="DIRECTION">
+                <block type="position_direction">
+                    <field name="DIRECTION"><value name="DIRECTION">L</value></field>
+                </block>
+            </value>
+            <value name="DEGREES">
+                <block type="math_number">
+                    <field name="NUM">1</field>
+                </block>
+            </value>
+        </block>
+        <block type="position_direction">
+            <field name="DIRECTION">F</field>
+        </block>
+    </category>
+    <sep></sep>
     <category id="catLogic" colour="210" name="Logic">
         <block type="controls_if"></block>
         <block type="logic_compare"></block>

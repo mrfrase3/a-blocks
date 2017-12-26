@@ -9,7 +9,9 @@ body {
     user-select: none; /* General */
 }
 
-body > div {
+#right-view,
+#left-view,
+body > .gutter {
     display: inline-block;
     height: 100%;
     width: 100%;
@@ -28,7 +30,12 @@ body > div {
     cursor: n-resize;
 }
 
-#left-view-bottom .row > div .active .card-content {
+#left-view-bottom .card-content {
+    padding: 0.5rem;
+    padding-top: calc(0.5rem - 6px);
+}
+
+#left-view-bottom .row > div .active > div > div {
     background: lightblue;
 }
 
@@ -64,3 +71,12 @@ body > div {
     -webkit-box-sizing: initial!important;
     box-sizing: initial!important;
 }
+
+.blocklyWidgetDiv .goog-palette-table {
+    width: initial;
+}
+
+.blocklyWidgetDiv .goog-palette-cell {
+    padding: 0;
+}
+

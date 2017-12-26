@@ -2,6 +2,7 @@ import {ObjPreview} from './obj-preview.js';
 import {BlocklyObj} from '../blockly/blockly-init.js';
 
 const previews = {};
+const template = Handlebars.compile(require('./scene-panel-card.html'));
 
 AFRAME.registerComponent('scene-panel', {
   schema: {
@@ -12,33 +13,28 @@ AFRAME.registerComponent('scene-panel', {
   init: function(){
     let self = this;
     this.id = Math.random().toString(16).substr(2);
-    this.$el = $(require('./scene-panel-card.html').replace('{{id}}', this.id).replace('{{name}}', this.data.name));
+    this.$el = $(template({id: this.id, name: this.data.name}));
     this.$sceneTab = $('#scene-tab-'+this.data.type).append(this.$el);
     previews[this.id] = new ObjPreview($('#scene-panel-card-'+this.id+' .obj-preview').get(0), this.el);
 
-    this.bo = new BlocklyObj(this.id, this.data.name);
+    //this.bo = new BlocklyObj(this.id, this.data.name);
+    this.el.setAttribute('blockly', '');
 
     $('#scene-panel-card-'+this.id+' .card-image').click(function(){
       if(self.$el.hasClass('active')){
         self.$el.removeClass('active');
-        self.bo.hide();
+        self.el.components.blockly.hide();
       } else {
         self.$sceneTab.parent().find('div.active').removeClass('active');
         self.$el.addClass('active');
-        self.bo.show();
+        self.el.components.blockly.show();
       }
     });
 
-    $('#scene-panel-card-'+this.id+' .toggle-vis').click(function(){
-      if($(this).hasClass('fa-eye')){
-        $(this).removeClass('fa-eye');
-        $(this).addClass('fa-eye-slash');
-        self.el.setAttribute('visible', false);
-      } else {
-        $(this).removeClass('fa-eye-slash');
-        $(this).addClass('fa-eye');
-        self.el.setAttribute('visible', true);
-      }
+    this.lastVis = true;
+    this.$toggleVis = $('#scene-panel-card-'+this.id+' .toggle-vis');
+    this.$toggleVis.click(function(){
+      self.el.setAttribute('visible', !self.el.components.visible.data);
     });
   },
 
@@ -48,7 +44,13 @@ AFRAME.registerComponent('scene-panel', {
     $('#scene-panel-card-'+this.id).parent().remove();
   },
 
-  tick: function(time,delta){}
+  tick: function(time,delta){
+    if(this.el.components.visible.data !== this.lastVis){
+      this.lastVis = this.el.components.visible.data;
+      this.$toggleVis.removeClass(this.lastVis ? 'fa-eye-slash' : 'fa-eye');
+      this.$toggleVis.addClass(this.lastVis ? 'fa-eye' : 'fa-eye-slash');
+    }
+  }
 });
 
 $(document).ready(function(){

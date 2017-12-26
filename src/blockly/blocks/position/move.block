@@ -1,0 +1,25 @@
+(function(){
+  var steps = ({{{steps}}})*0.001;
+  var dir = {{{dir}}};
+  if(dir === 'L' || dir === 'D' || dir === 'B') steps = steps*-1;
+  var vec = new THREE.Vector3(
+    (dir === 'L' || dir === 'R' || dir === 'X') ? steps : 0,
+    (dir === 'U' || dir === 'D' || dir === 'Y') ? steps : 0,
+    (dir === 'B' || dir === 'F' || dir === 'Z') ? steps : 0
+  );
+  {{#if rotRelative}}
+    if(!(dir === 'X' || dir === 'Y' || dir === 'Z')) {
+      var rot = this.el.components.rotation.data;
+      vec.applyEuler(new THREE.Euler(
+        (rot.x / 180) * Math.PI,
+        (rot.y / 180) * Math.PI,
+        (rot.z / 180) * Math.PI
+      ));
+    }
+  {{/if}}
+  {{#if posRelative}}
+    var pos = this.el.components.position.data;
+    vec.set(pos.x + vec.x, pos.y + vec.y, pos.z + vec.z);
+  {{/if}}
+  this.el.setAttribute('position', vec.toArray().join(' '));
+}).apply(this);
