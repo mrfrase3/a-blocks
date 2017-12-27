@@ -1,6 +1,6 @@
 (function(){
-  var degrees = ({{{degrees}}});
-  var dir = {{{dir}}};
+  var degrees = ({{{degrees}}}) || 0;
+  var dir = {{{dir}}} || 'F';
   if(dir === 'L' || dir === 'D' || dir === 'B') degrees = degrees*-1;
   var rot = this.el.components.rotation.data;
   if(dir === 'L' || dir === 'R' || dir === 'Y') rot.y {{#if rotRelative}}+{{/if}}= degrees;

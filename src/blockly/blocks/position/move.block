@@ -1,6 +1,6 @@
 (function(){
-  var steps = ({{{steps}}})*0.001;
-  var dir = {{{dir}}};
+  var steps = ({{{steps}}})*0.001 || 0;
+  var dir = {{{dir}}} || 'F';
   if(dir === 'L' || dir === 'D' || dir === 'B') steps = steps*-1;
   var vec = new THREE.Vector3(
     (dir === 'L' || dir === 'R' || dir === 'X') ? steps : 0,

@@ -5,12 +5,15 @@ const toolboxTemplate = Handlebars.compile(require('./toolbox.xml'));
 
 require('./blocks/aframeevent/aframeevent.js');
 require('./blocks/position/position.js');
+require('./blocks/general/general.js');
 
 AFRAME.registerComponent('blockly', {
-  schema: {},
+  schema: {
+    type: 'string'
+  },
 
   init: function(){
-    this.events = {};
+
     this.el.bo = this;
     this.id = this.el.components['scene-panel'].data.id;
     this.name = this.el.components['scene-panel'].data.name;
@@ -28,11 +31,29 @@ AFRAME.registerComponent('blockly', {
     this.workspace = Blockly.inject(this.blocklyDiv, {
       toolbox: toolboxTemplate({name: this.name})
     });
+    Blockly.JavaScript.init(this.workspace);
+
+    if(this.data) this.loadFromDom(this.data);
 
     this.workspace.addChangeListener(()=>this.compile());
-    Blockly.JavaScript.init(this.workspace);
     //Blockly.svgResize(this.workspace);
     this.hide();
+  },
+
+  update: function(){
+    if(this.wsDom !== this.data) this.loadFromDom(this.data);
+  },
+
+  loadFromDom: function(ws){
+    this.wsDom = ws;
+    ws = Blockly.Xml.textToDom(ws);
+    Blockly.Xml.domToWorkspace(ws, this.workspace);
+  },
+
+  saveToDom: function(){
+    let ws = Blockly.Xml.workspaceToDom(this.workspace);
+    this.wsDom = Blockly.Xml.domToText(ws);
+    this.el.setAttribute('blockly', this.wsDom);
   },
 
   show: function(){
@@ -67,22 +88,20 @@ AFRAME.registerComponent('blockly', {
 
   compile: function(){
     let blocks = this.workspace.getTopBlocks();
-    this.events = {};
+    this.codes = {};
     for(let i in blocks){
-      let name = blocks[i].type;
-      if(name.indexOf('aframeevent') !== 0) continue;
-      if(!this.events[name]) this.events[name] = [];
-      eval('this.events[name].push(function(){'+Blockly.JavaScript.blockToCode(blocks[i])+'});');
+      let event = blocks[i].type;
+      //console.log(name);
+      if(event.indexOf('aframeevent') !== 0) continue;
+      if(!this.codes[event]) this.codes[event] = [];
+      let code = Blockly.JavaScript.blockToCode(blocks[i]);
+      this.codes[event].push(code);
     }
-    if(!this.vars) this.vars = {};
+    this.el.setAttribute('code-exec', JSON.stringify(this.codes));
   },
 
-  trigger: function(event, args, context){
-    for(let i in this.events[event]) this.events[event][i].apply(context || this, args);
-  },
-
-  tick(time, delta){
-    this.trigger('aframeevent_tick', [time, delta]);
+  remove: function(){
+    this.workspace.dispose();
   }
 });
 
@@ -91,25 +110,3 @@ $(document).ready(function(){
   $('head').prepend($('#materializeCSS'));
 });
 
-Blockly.JavaScript['variables_get'] = function(block) {
-  // Variable getter.
-  var code = 'this.'+Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'),
-    Blockly.Variables.VARIABLE_CATEGORY_NAME);
-  return [code, Blockly.JavaScript.ORDER_ATOMIC];
-};
-
-Blockly.JavaScript['variables_set'] = function(block) {
-  // Variable setter.
-  var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
-    Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  var varName = 'this.'+Blockly.JavaScript.variableDB_.getName(
-    block.getFieldValue('VAR'), Blockly.Variables.VARIABLE_CATEGORY_NAME);
-  return varName + ' = ' + argument0 + ';\n';
-};
-
-Blockly.JavaScript['text_print'] = function(block) {
-  // Print statement.
-  var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
-    Blockly.JavaScript.ORDER_NONE) || '\'\'';
-  return 'Materialize.toast(' + msg + ', 1000);\n';
-};

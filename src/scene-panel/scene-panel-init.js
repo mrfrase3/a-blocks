@@ -1,5 +1,4 @@
 import {ObjPreview} from './obj-preview.js';
-import {BlocklyObj} from '../blockly/blockly-init.js';
 
 const previews = {};
 const template = Handlebars.compile(require('./scene-panel-card.html'));
@@ -16,9 +15,6 @@ AFRAME.registerComponent('scene-panel', {
     this.$el = $(template({id: this.id, name: this.data.name}));
     this.$sceneTab = $('#scene-tab-'+this.data.type).append(this.$el);
     previews[this.id] = new ObjPreview($('#scene-panel-card-'+this.id+' .obj-preview').get(0), this.el);
-
-    //this.bo = new BlocklyObj(this.id, this.data.name);
-    this.el.setAttribute('blockly', '');
 
     $('#scene-panel-card-'+this.id+' .card-image').click(function(){
       if(self.$el.hasClass('active')){
