@@ -7,5 +7,5 @@
   if(dir === 'U' || dir === 'D' || dir === 'X') rot.x {{#if rotRelative}}+{{/if}}= degrees;
   if(dir === 'B' || dir === 'F' || dir === 'Z') rot.z {{#if rotRelative}}+{{/if}}= degrees;
 
-  this.el.setAttribute('rotation', rot.x +' '+ rot.y +' '+ rot.z);
+  this.el.setAttribute('rotation', rot.x%360 +' '+ rot.y%360 +' '+ rot.z%360);
 }).apply(this);

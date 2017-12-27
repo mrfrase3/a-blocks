@@ -3,34 +3,51 @@
     <sep></sep>
     <category id="catEvents" colour="40" name="Events">
         <block type="aframeevent_tick"></block>
+        <block type="aframeevent_interval"></block>
     </category>
     <category id="catPos" colour="240" name="Position">
         <block type="position_move">
             <value name="DIRECTION">
                 <block type="position_direction">
-                    <field name="DIRECTION">F</field>
+                    <field name="DIR">F</field>
                 </block>
             </value>
             <value name="STEPS">
-                <block type="math_number">
+                <shadow type="math_number">
                     <field name="NUM">10</field>
-                </block>
+                </shadow>
             </value>
         </block>
         <block type="position_rotate">
             <value name="DIRECTION">
                 <block type="position_direction">
-                    <field name="DIRECTION"><value name="DIRECTION">L</value></field>
+                    <field name="DIR">L</field>
                 </block>
             </value>
             <value name="DEGREES">
-                <block type="math_number">
+                <shadow type="math_number">
                     <field name="NUM">1</field>
-                </block>
+                </shadow>
             </value>
         </block>
         <block type="position_direction">
-            <field name="DIRECTION">F</field>
+            <field name="DIR">F</field>
+        </block>
+        <block type="position_getpos"> </block>
+        <block type="position_getrot"> </block>
+        <block type="position_setpos">
+            <value name="VAL">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="position_setrot">
+            <value name="VAL">
+                <shadow type="math_number">
+                    <field name="NUM">0</field>
+                </shadow>
+            </value>
         </block>
     </category>
     <sep></sep>

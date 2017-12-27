@@ -31,6 +31,9 @@ AFRAME.registerComponent('code-exec',{
   },
 
   tick(time, delta){
+    this._time = time;
+    this._delta = delta;
     this.trigger('aframeevent_tick', [time, delta]);
+    this.trigger('aframeevent_interval', [time, delta]);
   }
 });

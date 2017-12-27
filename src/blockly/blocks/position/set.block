@@ -1,0 +1,3 @@
+var vec = {x: this.el.components.{{type}}.data.x, y: this.el.components.{{type}}.data.y, z: this.el.components.{{type}}.data.z};
+vec.{{dir}} = ({{val}});
+this.el.setAttribute('{{type}}', vec.x+' '+vec.y+' '+vec.z);

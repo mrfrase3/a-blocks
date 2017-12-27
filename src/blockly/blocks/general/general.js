@@ -28,6 +28,7 @@ Blockly.JavaScript['math_change'] = function(block) {
     ' : 0) + ' + argument0 + ';\n';
 };
 
+
 Blockly.JavaScript['text_print'] = function(block) {
   // Print statement.
   var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
