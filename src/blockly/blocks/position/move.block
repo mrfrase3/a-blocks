@@ -9,7 +9,7 @@
   );
   {{#if rotRelative}}
     if(!(dir === 'X' || dir === 'Y' || dir === 'Z')) {
-      var rot = this.el.components.rotation.data;
+      var rot = self.el.components.rotation.data;
       vec.applyEuler(new THREE.Euler(
         (rot.x / 180) * Math.PI,
         (rot.y / 180) * Math.PI,
@@ -18,8 +18,12 @@
     }
   {{/if}}
   {{#if posRelative}}
-    var pos = this.el.components.position.data;
+    var pos = self.el.components.position.data;
     vec.set(pos.x + vec.x, pos.y + vec.y, pos.z + vec.z);
   {{/if}}
-  this.el.setAttribute('position', vec.toArray().join(' '));
-}).apply(this);
+  if(self.el.hasAttribute('dynamic-body')){
+    self.el.body.position.set(vec.x, vec.y, vec.z);
+  } else {
+    self.el.setAttribute('position', vec.toArray().join(' '));
+  }
+}).apply(self);

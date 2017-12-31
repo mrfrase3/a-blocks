@@ -93,7 +93,7 @@ Blockly.Blocks['position_getpos'] = {
 
 Blockly.JavaScript['position_getpos'] = function(block) {
   var dir = block.getFieldValue('DIR');
-  return ['(this.el.components.position.data.'+dir+'*1000)', Blockly.JavaScript.ORDER_NONE];
+  return ['(self.el.components.position.data.'+dir+'*1000)', Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.Blocks['position_getrot'] = {
@@ -110,7 +110,7 @@ Blockly.Blocks['position_getrot'] = {
 
 Blockly.JavaScript['position_getrot'] = function(block) {
   var dir = block.getFieldValue('DIR');
-  return ['(this.el.components.rotation.data.'+dir+')', Blockly.JavaScript.ORDER_NONE];
+  return ['(self.el.components.rotation.data.'+dir+')', Blockly.JavaScript.ORDER_NONE];
 };
 
 Blockly.Blocks['position_setpos'] = {

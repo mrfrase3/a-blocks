@@ -8,6 +8,8 @@ AFRAME.registerComponent('code-exec',{
   init: function(){
     this.events = {};
     this.vars = variables;
+    this.callbacks = {};
+    this.blockstore = {waits: {}};
     if(this.data) this.eval(this.data);
   },
 
@@ -18,10 +20,18 @@ AFRAME.registerComponent('code-exec',{
   eval: function(codes){
     this.codes = JSON.parse(codes);
     this.events = {};
+    this.callbacks = {};
+    let self = this;
     for(event in this.codes){
-      if(!this.events[event]) this.events[event] = [];
-      for(let i in this.codes[event]) {
-        eval('this.events[event].push(function(){' + this.codes[event][i] + '});');
+      if(event === 'callbacks'){
+        for(let i in this.codes[event]){
+          eval('this.callbacks[i] = function(){' + this.codes[event][i] + '};');
+        }
+      } else {
+        if (!this.events[event]) this.events[event] = [];
+        for (let i in this.codes[event]) {
+          eval('this.events[event].push(function(){' + this.codes[event][i] + '});');
+        }
       }
     }
   },
@@ -35,5 +45,16 @@ AFRAME.registerComponent('code-exec',{
     this._delta = delta;
     this.trigger('aframeevent_tick', [time, delta]);
     this.trigger('aframeevent_interval', [time, delta]);
+    for(let id in this.blockstore.waits){
+      if(!this.callbacks[id]) continue;
+      let toDelete = [];
+      for(let i in this.blockstore.waits[id]){
+        if(time >= this.blockstore.waits[id][i]){
+          toDelete.unshift(i);
+          this.callbacks[id].apply(this);
+        }
+      }
+      for(let i in toDelete) this.blockstore.waits[id].splice(toDelete[i], 1);
+    }
   }
 });

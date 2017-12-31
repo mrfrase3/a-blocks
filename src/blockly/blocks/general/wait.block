@@ -1,0 +1,4 @@
+(function(){
+  if(!self.blockstore.waits['{{{id}}}']) self.blockstore.waits['{{{id}}}'] = [];
+  self.blockstore.waits['{{{id}}}'].push(self._time + ({{{sec}}})*1000);
+}).apply(self);

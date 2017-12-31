@@ -1,11 +1,12 @@
 <div class="col s12 m6 offset-m3 l4">
-    <div class="card" id="scene-panel-card-{{id}}">
+    <div class="card" id="scene-panel-card-{{id}}" data-type="{{type}}">
         <div class="card-image">
             <canvas class="obj-preview"></canvas>
             <span class="card-title">{{name}}</span>
         </div>
         <div class="card-content">
-            <i class="fa fa-eye toggle-vis"></i>
+            <i class="fa fa-eye toggle-vis" data-position="top" data-delay="50" data-tooltip="Switch Invisible"></i>
+            <i class="fa fa-globe toggle-grav" data-position="top" data-delay="50" data-tooltip="Switch Gravity"></i>
         </div>
     </div>
 </div>

@@ -4,6 +4,13 @@
     <category id="catEvents" colour="40" name="Events">
         <block type="aframeevent_tick"></block>
         <block type="aframeevent_interval"></block>
+        <block type="time_async_wait">
+            <value name="SEC">
+                <shadow type="math_number">
+                    <field name="NUM">10</field>
+                </shadow>
+            </value>
+        </block>
     </category>
     <category id="catPos" colour="240" name="Position">
         <block type="position_move">
@@ -252,10 +259,19 @@
                 </shadow>
             </value>
         </block>
-        <block type="text_prompt_ext">
-            <value name="TEXT">
+        <block type="text_async_prompt">
+            <value name="MSG">
                 <shadow type="text">
                     <field name="TEXT">abc</field>
+                </shadow>
+            </value>
+            <value name="CALLBACK">
+                <shadow type="text_print">
+                    <value name="TEXT">
+                        <shadow type="variables_get">
+                            <field name="VAR">item</field>
+                        </shadow>
+                    </value>
                 </shadow>
             </value>
         </block>

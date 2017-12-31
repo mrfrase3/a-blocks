@@ -2,10 +2,14 @@
   var degrees = ({{{degrees}}}) || 0;
   var dir = {{{dir}}} || 'F';
   if(dir === 'L' || dir === 'D' || dir === 'B') degrees = degrees*-1;
-  var rot = this.el.components.rotation.data;
+  var rot = self.el.components.rotation.data;
   if(dir === 'L' || dir === 'R' || dir === 'Y') rot.y {{#if rotRelative}}+{{/if}}= degrees;
   if(dir === 'U' || dir === 'D' || dir === 'X') rot.x {{#if rotRelative}}+{{/if}}= degrees;
   if(dir === 'B' || dir === 'F' || dir === 'Z') rot.z {{#if rotRelative}}+{{/if}}= degrees;
 
-  this.el.setAttribute('rotation', rot.x%360 +' '+ rot.y%360 +' '+ rot.z%360);
-}).apply(this);
+  if(self.el.hasAttribute('dynamic-body')){
+    self.el.body.quaternion.setFromEuler(rot.x % 360, rot.y % 360, rot.z % 360);
+  } else {
+    self.el.setAttribute('rotation', rot.x % 360 + ' ' + rot.y % 360 + ' ' + rot.z % 360);
+  }
+}).apply(self);

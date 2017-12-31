@@ -1,5 +1,5 @@
 var time = arguments[0];
 var delta = arguments[1];
-if(!this.vars['_interval_{{id}}']) this.vars['_interval_{{id}}'] = time;
-if(time - this.vars['_interval_{{id}}'] < ({{sec}})*1000) return;
-this.vars['_interval_{{id}}'] = time;
+if(!self.blockstore['interval_{{id}}']) self.blockstore['interval_{{id}}'] = time;
+if(time - self.blockstore['interval_{{id}}'] < ({{sec}})*1000) return;
+self.blockstore['interval_{{id}}'] = time;

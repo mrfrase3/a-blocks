@@ -1,0 +1,14 @@
+(function(){
+  var msg = {{{msg}}};
+  var $toastContent = $('<form action><div class="input-field" style="display:inline-block;"><input id="msg"><label for="msg"></label></div><button class="btn blue" type="submit">Ok</button></form>');
+  $toastContent.find('label').text(msg);
+  $toastContent.find('input').attr('type', '{{type}}');
+  Materialize.toast($toastContent);
+  $toastContent.submit(function(e){
+    e.preventDefault();
+    self.vars.{{var}} = $toastContent.find('input').val();
+    {{#if isNum}} self.vars.{{var}} = Number(self.vars.{{var}}) || 0;{{/if}}
+    $toastContent.parent().remove();
+    self.callbacks['{{{id}}}'].apply(self);
+  });
+}).apply(self);

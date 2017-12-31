@@ -2,6 +2,7 @@
 const Blockly = require('node-blockly/browser');
 
 const toolboxTemplate = Handlebars.compile(require('./toolbox.xml'));
+const loopTypes = ['controls_repeat_ext', 'controls_repeat', 'controls_whileUntil', 'controls_for', 'controls_forEach'];
 
 require('./blocks/aframeevent/aframeevent.js');
 require('./blocks/position/position.js');
@@ -88,16 +89,30 @@ AFRAME.registerComponent('blockly', {
 
   compile: function(){
     let blocks = this.workspace.getTopBlocks();
-    this.codes = {};
+    this.codes = {callbacks: {}};
     for(let i in blocks){
       let event = blocks[i].type;
       //console.log(name);
       if(event.indexOf('aframeevent') !== 0) continue;
       if(!this.codes[event]) this.codes[event] = [];
+
+      this.asyncCompile(blocks[i]);
+
       let code = Blockly.JavaScript.blockToCode(blocks[i]);
       this.codes[event].push(code);
     }
     this.el.setAttribute('code-exec', JSON.stringify(this.codes));
+  },
+
+  asyncCompile: function(currBlock, noNext){
+    if(!currBlock) return;
+    //console.log(Blockly.Blocks[currBlock.type]);
+    if (Blockly.Blocks[currBlock.type]._isAsync){
+      this.codes.callbacks[currBlock.id] = Blockly.JavaScript.statementToCode(currBlock, 'CALLBACK') || '';
+    }
+    let children = currBlock.getChildren();
+    for(let i in children) this.asyncCompile(children[i], true);
+    if(!noNext) this.asyncCompile(currBlock.getNextBlock());
   },
 
   remove: function(){

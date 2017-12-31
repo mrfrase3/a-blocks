@@ -1,3 +1,10 @@
-var vec = {x: this.el.components.{{type}}.data.x, y: this.el.components.{{type}}.data.y, z: this.el.components.{{type}}.data.z};
-vec.{{dir}} = ({{val}});
-this.el.setAttribute('{{type}}', vec.x+' '+vec.y+' '+vec.z);
+(function(){
+  var vec = {x: self.el.components.{{type}}.data.x, y: self.el.components.{{type}}.data.y, z: self.el.components.{{type}}.data.z};
+  vec.{{dir}} = ({{val}});
+  if(self.el.hasAttribute('dynamic-body')){
+    if('{{type}}' === 'rotation') self.el.body.quaternion.setFromEuler(vec.x % 360, vec.y % 360, vec.z % 360);
+    else self.el.body.position.set(vec.x, vec.y, vec.z);
+  } else {
+    self.el.setAttribute('{{type}}', vec.x + ' ' + vec.y + ' ' + vec.z);
+  }
+}).apply(self);

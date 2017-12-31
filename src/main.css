@@ -54,6 +54,10 @@ body > .gutter {
     color: gray;
 }
 
+.card[data-type="env"] .toggle-grav{
+    display: none;
+}
+
 /* make materialize and blockly get along */
 .blocklyHtmlInput {
     background-color: white!important;
