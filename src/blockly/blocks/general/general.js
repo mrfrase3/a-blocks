@@ -5,6 +5,10 @@ const codes = {
   wait: Handlebars.compile(require('./wait.block'))
 };
 
+window.colourRandom = function(){
+  return '#'+Math.random().toString(16).substr(2, 6);
+};
+
 //Recode some of the default blocks to work with this implementation
 
 Blockly.JavaScript['variables_get'] = function(block) {

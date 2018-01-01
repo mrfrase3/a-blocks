@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>A-Blocks</title>
-    <link id="materializeCSS" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" integrity="sha256-e22BQKCF7bb/h/4MFJ1a4lTRR2OuAe8Hxa/3tgU5Taw=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link id="materializeCSS" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" integrity="sha256-e22BQKCF7bb/h/4MFJ1a4lTRR2OuAe8Hxa/3tgU5Taw=" crossorigin="anonymous" />
     <style>.loader{background-color:white;width:100vw;height:100vh;position: fixed;z-index:99999;top:0;left:0;transition:height 0.35s ease-out;overflow-y:hidden;}.loader .loader-center {position:absolute;left:50%;top:50%;transform:translateX(-50%) translateY(-50%);}</style>
 </head>
 <body>
@@ -25,13 +25,36 @@
             </ul>
             <div class="divider"></div>
             <div class="row">
-                <div id="scene-tab-env" class="col s12"></div>
-                <div id="scene-tab-obj" class="col s12"></div>
+                <div id="scene-tab-env" class="col s12">
+                    <div class="col card-wrap">
+                        <div class="card add-obj valign-wrapper" data-type="env">
+                            <div class="card-content center-align col s12"><i class="fa fa-plus fa-5x"></i><br><h6>Add New Object</h6></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="scene-tab-obj" class="col s12">
+                    <div class="col card-wrap">
+                        <div class="card add-obj valign-wrapper" data-type="obj">
+                            <div class="card-content center-align col s12"><i class="fa fa-plus fa-5x"></i><br><h6>Add New Object</h6></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div id="right-view">
-        <div id="blocklyNoSelect">Nothing Selected</div>
+        <div id="blocklyNoSelect" class="container">
+            <div class="row">
+                <h2 class="center-align col s10 offset-s1">Select an Object to Start Coding!</h2><h4 class="left-align col s10 offset-s1">Things</h4>
+                <ul class="collection col s10 offset-s1" id="scene-col-obj" style="padding:0;">
+                    <a href="#" class="collection-item add-obj" data-type="obj"><i class="fa fa-plus"></i> Add New Object</a>
+                </ul>
+                <h4 class="left-align col s10 offset-s1">World</h4>
+                <ul class="collection col s10 offset-s1" id="scene-col-env" style="padding:0;">
+                    <a href="#" class="collection-item add-obj" data-type="env"><i class="fa fa-plus"></i> Add New Object</a>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="loader"><div class="loader-center"><div class="preloader-wrapper big active"><div class="spinner-layer spinner-blue-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div></div></div>
 

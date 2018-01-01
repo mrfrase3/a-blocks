@@ -364,6 +364,13 @@
                 </shadow>
             </value>
         </block>
+        <block type="props_colour_set">
+            <value name="COLOUR">
+                <shadow type="colour_picker">
+                    <field name="COLOUR">#ff0000</field>
+                </shadow>
+            </value>
+        </block>
     </category>
     <sep></sep>
     <category id="catVariables" colour="330" custom="VARIABLE" name="Variables"></category>

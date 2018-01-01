@@ -14,10 +14,16 @@ AFRAME.registerComponent('scene-panel', {
     if(!this.el.id) this.el.id = Math.random().toString(16).substr(2);
     this.id = this.el.id;
     this.$el = $(template({id: this.id, name: this.data.name, type: this.data.type}));
-    this.$sceneTab = $('#scene-tab-'+this.data.type).append(this.$el);
+    this.$sceneTab = $('#scene-tab-'+this.data.type).prepend(this.$el);
+    this.$sceneTab = $('#scene-col-'+this.data.type).prepend(
+      '<a href="#" class="collection-item" data-type="env" id="scene-panel-col-'+this.id+'"><i class="fa fa-cube"></i> '+this.data.name+'</a>'
+    );
     previews[this.id] = new ObjPreview($('#scene-panel-card-'+this.id+' .obj-preview').get(0), this.el);
 
-    $('#scene-panel-card-'+this.id+' .card-image').click(function(){
+    $('#scene-panel-card-'+this.id+' .card-image, #scene-panel-col-'+this.id).click(function(e){
+      e.preventDefault();
+      $('.scene-tabs a[href="#scene-tab-'+self.data.type+'"]').click();
+      if(e.target.className === 'card-title') return;
       if(self.$el.hasClass('active')){
         self.$el.removeClass('active');
         self.el.components.blockly.hide();
@@ -28,6 +34,12 @@ AFRAME.registerComponent('scene-panel', {
       }
     });
     $('#scene-panel-card-'+this.id+' i').tooltip();
+
+    $('#scene-panel-card-'+this.id+' .card-title').keyup(function(e){
+      //e.preventDefault();
+      self.el.setAttribute('scene-panel', {name: $(this).text(), type: self.data.type});
+      if(self.el.components.blockly) self.el.components.blockly.updateName();
+    });
 
     this.lastVis = true;
     this.lastGrav = false;
@@ -43,6 +55,7 @@ AFRAME.registerComponent('scene-panel', {
       self.el.removeAttribute(isDynam ? 'dynamic-body' : 'static-body');
       self.el.setAttribute(isDynam ? 'static-body' : 'dynamic-body', '');
     });
+    $('#scene-panel-card-'+this.id+' .rename').click(()=>{$('#scene-panel-card-'+this.id+' .card-title').focus()});
   },
 
   remove: function(){
@@ -72,6 +85,11 @@ $(document).ready(function(){
   const onresize = function(e) {
     for(let i in previews) previews[i].resize();
     $tabs.trigger('resize');
+    let maxHeight = 0;
+    $('#left-view-bottom .card:not(.add-obj)').each(function(){
+      maxHeight = Math.max(maxHeight, $(this).height());
+    });
+    $('#left-view-bottom .card.add-obj').height(maxHeight);
   };
   window.addEventListener('resize', onresize, false);
   window.splitEvents.onDrag.push(onresize);

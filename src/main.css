@@ -49,6 +49,7 @@ body > .gutter {
 
 .card-content > i {
     cursor: pointer;
+    padding: 0 0.2em;
 }
 .card-content > i:hover {
     color: gray;
@@ -56,6 +57,23 @@ body > .gutter {
 
 .card[data-type="env"] .toggle-grav{
     display: none;
+}
+
+.card-title {
+    padding: 0!important;
+    left: 24px!important;
+    bottom: 24px!important;
+    cursor: text;
+}
+
+.card-image {
+    cursor: pointer;
+}
+
+.card-wrap{
+    min-width: 13rem;
+    max-width: 25rem;
+    width: 33.3333333%;
 }
 
 /* make materialize and blockly get along */

@@ -7,6 +7,7 @@ const loopTypes = ['controls_repeat_ext', 'controls_repeat', 'controls_whileUnti
 require('./blocks/aframeevent/aframeevent.js');
 require('./blocks/position/position.js');
 require('./blocks/general/general.js');
+require('./blocks/props/props.js');
 
 AFRAME.registerComponent('blockly', {
   schema: {
@@ -16,7 +17,7 @@ AFRAME.registerComponent('blockly', {
   init: function(){
 
     this.el.bo = this;
-    this.id = this.el.components['scene-panel'].data.id;
+    this.id = this.el.id;
     this.name = this.el.components['scene-panel'].data.name;
     this.$blocklyArea =$('#right-view');
     this.$blocklyDiv = $('<div id="blocklyDiv-'+this.id+'" style="position: absolute"></div>');
@@ -43,6 +44,11 @@ AFRAME.registerComponent('blockly', {
 
   update: function(){
     if(this.wsDom !== this.data) this.loadFromDom(this.data);
+  },
+
+  updateName: function(){
+    this.name = this.el.components['scene-panel'].data.name;
+    this.workspace.updateToolbox(toolboxTemplate({name: this.name}));
   },
 
   loadFromDom: function(ws){
