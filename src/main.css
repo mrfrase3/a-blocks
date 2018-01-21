@@ -30,6 +30,15 @@ body > .gutter {
     cursor: n-resize;
 }
 
+#right-view > div {
+    min-height: 100vh;
+}
+
+#right-view > div > .row{
+    min-height: calc(100vh - 49px);
+    margin-bottom: 0;
+}
+
 #left-view-bottom .card-content {
     padding: 0.5rem;
     padding-top: calc(0.5rem - 6px);

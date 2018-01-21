@@ -22,7 +22,7 @@ module.exports = {
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, use: ["url-loader"] },
       { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, use: ["url-loader"] },
       { test: /\.css$/, use: ["style-loader", "css-loader"] },
-      { test: /\.html$/, use: ["html-loader"] },
+      { test: /\.(html|hbs)$/, use: ["html-loader"] },
       { test: /\.(txt|xml|block)$/, use: ["raw-loader"] }
     ]
   }

@@ -1,0 +1,64 @@
+<div class="row">
+    <form class="col s12" action="#" data-id="{{id}}">
+        <h3>General Settings</h3>
+        <div class="row">
+            <div class="switch col s12">
+                <h5>  <i class="fa fa-globe"></i> Gravity (Fall Down and Bounce)</h5>
+                <label>
+                    Off
+                    <input type="checkbox" class="toggle-grav">
+                    <span class="lever"></span>
+                    On
+                </label>
+            </div>
+            <div class="divider"></div>
+            <div class="switch col s12">
+                <h5>  <i class="fa fa-eye"></i> Invisible (See Through)</h5>
+                <label>
+                    Off
+                    <input type="checkbox" class="toggle-vis">
+                    <span class="lever"></span>
+                    On
+                </label>
+            </div>
+        </div>
+        <div class="shape-settings">
+            <h3>Shape Settings</h3>
+            <div class="row selectShapeWrap">
+                <div class="input-field col s12 m4">
+                    <select class="selectShape">
+                        <option value="" disabled selected>Choose a shape</option>
+                        <option value="box">Box</option>
+                        <option value="sphere">Ball</option>
+                        <option value="cylinder">Can</option>
+                    </select>
+                    <label>Object Shape</label>
+                </div>
+            </div>
+            <div class="row inputDiameterWrap">
+                <div class="input-field col s12 m4">
+                    <input value="1" type="number" class="inputDiameter">
+                    <label for="first_name">Diameter (Circle Size)</label>
+                </div>
+            </div>
+            <div class="row inputHeightWrap">
+                <div class="input-field col s12 m4">
+                    <input value="1" type="number" class="inputHeight">
+                    <label for="last_name">Height ( Up/Down )</label>
+                </div>
+            </div>
+            <div class="row inputWidthWrap">
+                <div class="input-field col s12 m4">
+                    <input value="1" type="number" class="inputWidth">
+                    <label>Width ( Left/Right )</label>
+                </div>
+            </div>
+            <div class="row inputDepthWrap">
+                <div class="input-field col s12 m4">
+                    <input value="1" type="number" class="inputDepth">
+                    <label>Depth ( Forwards/Backwards )</label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -15,20 +15,21 @@ AFRAME.registerComponent('blockly', {
   },
 
   init: function(){
+    const self = this;
+    if(!this.el.id) this.el.id = Math.random().toString(16).substr(2);
+    this.id = this.el.id;
+    this.$blocklyDiv = $('#blocklyDiv-'+this.id);
+    if(this.$blocklyDiv.length < 1) return setTimeout(function(){self.init();}, 10);
+    this.initalised = true;
 
     this.el.bo = this;
-    this.id = this.el.id;
-    this.name = this.el.components['scene-panel'].data.name;
-    this.$blocklyArea =$('#right-view');
-    this.$blocklyDiv = $('<div id="blocklyDiv-'+this.id+'" style="position: absolute"></div>');
-    this.$blocklyArea.append(this.$blocklyDiv);
+    this.name = 'Loading...';
+    if(this.el.components['scene-panel']) this.name = this.el.components['scene-panel'].data.name;
+
+    this.$blocklyArea = this.$blocklyDiv.parent();
 
     this.blocklyArea = this.$blocklyArea.get(0);
     this.blocklyDiv = this.$blocklyDiv.get(0);
-
-
-    window.addEventListener('resize', ()=>this.onresize(), false);
-    window.splitEvents.onDrag.push(()=>this.onresize());
 
     this.workspace = Blockly.inject(this.blocklyDiv, {
       toolbox: toolboxTemplate({name: this.name})
@@ -39,16 +40,17 @@ AFRAME.registerComponent('blockly', {
 
     this.workspace.addChangeListener(()=>this.compile());
     //Blockly.svgResize(this.workspace);
-    this.hide();
+
+    this.el.addEventListener('updateName', function(e){
+      if(self.name === e.detail) return;
+      self.name = e.detail;
+      self.workspace.updateToolbox(toolboxTemplate({name: e.detail}));
+    });
   },
 
   update: function(){
+    if(!this.initalised) return;
     if(this.wsDom !== this.data) this.loadFromDom(this.data);
-  },
-
-  updateName: function(){
-    this.name = this.el.components['scene-panel'].data.name;
-    this.workspace.updateToolbox(toolboxTemplate({name: this.name}));
   },
 
   loadFromDom: function(ws){
@@ -63,18 +65,8 @@ AFRAME.registerComponent('blockly', {
     this.el.setAttribute('blockly', this.wsDom);
   },
 
-  show: function(){
-    $('#right-view > div').hide();
-    this.$blocklyDiv.show();
-    requestAnimationFrame(()=>this.onresize());
-  },
-
-  hide: function(){
-    this.$blocklyDiv.hide();
-    $('#blocklyNoSelect').show();
-  },
-
   onresize: function(e) {
+    if(!this.initalised) return;
     // Compute the absolute coordinates and dimensions of blocklyArea.
     let element = this.blocklyArea;
     let x = 0;

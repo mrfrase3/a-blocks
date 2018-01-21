@@ -1,5 +1,4 @@
 require('aframe');
-require('aframe-extras').registerAll();
 
 var onresize = function(e) {
   var $cont = $('#left-view-top');
