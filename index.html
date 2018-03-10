@@ -16,12 +16,19 @@
 <div class="loader"><div class="loader-center"><div class="preloader-wrapper big active"><div class="spinner-layer spinner-blue-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div></div></div>
     <div id="left-view">
         <div id="left-view-top">
-            <a-scene embedded physics="debug:false;">
-                <a-entity geometry="primitive: box;" position="-1 0.5 -3" rotation="0 45 0" material="color:#4CC3D9;" scene-panel="name:Box;" blockly static-body obj-config custom-events></a-entity>
-                <a-entity geometry="primitive: sphere;radius: 1.25;" position="0 1.25 -5" material="src:url(./assets/img/moon.jpg)" scene-panel="name:Moon;" blockly static-body obj-config custom-events></a-entity>
-                <a-entity position="-0.8 1.25 -3" geometry="primitive: cylinder;radius: 0.2;height: 0.5;" material="src:url(./assets/img/soup.jpg)" scene-panel="name:Can;" rotation="0 225 0" blockly static-body obj-config custom-events></a-entity>
-                <a-plane position="0 0 -4" rotation="-90 0 0" geometry="primitive: plane;width: 40;height: 40;" color="#7BC8A4" scene-panel="name:Ground;type:env;" blockly static-body obj-config custom-events></a-plane>
+            <a-scene embedded physics="debug:true;">
+                <a-entity class="custom-obj" geometry="primitive: box;" position="-1 0.5 -3" rotation="0 45 0" material="color:#4CC3D9;" scene-panel="name:Box;" blockly static-body obj-config custom-events></a-entity>
+                <a-entity class="custom-obj" geometry="primitive: sphere;radius: 1.25;" position="0 1.25 -5" material="src:url(./assets/img/moon.jpg)" scene-panel="name:Moon;" blockly static-body obj-config custom-events></a-entity>
+                <a-entity class="custom-obj" position="-0.8 1.25 -3" geometry="primitive: cylinder;radius: 0.2;height: 0.5;" material="src:url(./assets/img/soup.jpg)" scene-panel="name:Can;" rotation="0 225 0" blockly static-body obj-config custom-events></a-entity>
+                <a-plane position="0 0 -4" rotation="-90 0 0" geometry="primitive: plane;width: 40;height: 40;" material="src:url(./assets/img/stones.jpg); repeat: 40 40;metalness: 0.2;roughness:0.5;" scene-panel="name:Ground;type:env;" blockly static-body obj-config custom-events></a-plane>
                 <a-sky color="#ECECEC" radius="100" scene-panel="name:Sky;type:env;" src="./assets/img/galaxy.jpg" blockly obj-config custom-events></a-sky>
+                <a-entity id="cameraRig" camera-rig>
+                    <!-- camera -->
+                    <a-entity id="head" camera wasd-controls look-controls></a-entity>
+                    <!-- hand controls -->
+                    <a-entity id="leftHand" hand-controls="left" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;" grab sphere-collider="objects: .custom-obj"></a-entity>
+                    <a-entity id="rightHand" hand-controls="right" teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;" grab sphere-collider="objects: .custom-obj"></a-entity>
+                </a-entity>
             </a-scene>
         </div>
         <div id="left-view-bottom">

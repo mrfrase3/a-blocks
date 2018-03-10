@@ -11,6 +11,7 @@
                 </shadow>
             </value>
         </block>
+        <block type="aframeevent_collision"></block>
     </category>
     <category id="catPos" colour="240" name="Position">
         <block type="position_move">

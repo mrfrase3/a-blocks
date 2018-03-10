@@ -1,0 +1,6 @@
+(function(){
+	let mat = self.el.getAttribute('material');
+	mat.color = ({{{colour}}}) || '#ff0000';
+	self.el.setAttribute('material', mat);
+	self.el.dispatchEvent(new CustomEvent('materialtextureloaded',{}));
+})();

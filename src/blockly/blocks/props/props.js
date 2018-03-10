@@ -1,7 +1,7 @@
 const Blockly = require('node-blockly/browser');
 
 const codes = {
-  //set_colour: Handlebars.compile(require('./set_colour.block'))
+  set_colour: Handlebars.compile(require('./set_colour.block'))
 };
 
 Blockly.Blocks['props_colour_set'] = {
@@ -21,5 +21,6 @@ Blockly.JavaScript['props_colour_set'] = function(block) {
   var ctx = {
     colour: Blockly.JavaScript.valueToCode(block, 'COLOUR', Blockly.JavaScript.ORDER_ATOMIC)
   };
-  return "self.el.setAttribute('color', ("+ctx.colour+") || '#ff0000');self.el.dispatchEvent(new CustomEvent('materialtextureloaded',{}));";
+  if(ctx.colour.indexOf('#') === 0) ctx.colour = '"' + ctx.colour + '"';
+  return codes.set_colour(ctx);
 };

@@ -21,6 +21,7 @@
   "devDependencies": {
     "aframe": "^0.7.1",
     "aframe-extras": "^3.13.1",
+    "aframe-teleport-controls": "^0.3.1",
     "css-loader": "^0.28.7",
     "html-loader": "^0.5.1",
     "node-blockly": "^1.0.31",

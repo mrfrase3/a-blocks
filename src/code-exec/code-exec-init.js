@@ -11,6 +11,8 @@ AFRAME.registerComponent('code-exec',{
     this.callbacks = {};
     this.blockstore = {waits: {}};
     if(this.data) this.eval(this.data);
+    let self = this;
+    this.el.addEventListener('collide', function (e) {/*console.log(e);*/self.trigger('aframeevent_collision', [e]);});
   },
 
   update: function(){

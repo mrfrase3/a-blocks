@@ -41,3 +41,31 @@ Blockly.JavaScript['aframeevent_interval'] = function(block) {
   };
   return codes.interval(ctx);
 };
+
+const get_all_objects = function() {
+  let options = [['Left Hand', 'leftHand'],['Right Hand', 'rightHand']];
+  $('a-entity[scene-panel]').each(function(){
+    options.push([
+      $(this).get(0).components['scene-panel'].data.name,
+      $(this).attr('id')
+    ]);
+  });
+  return options;
+};
+
+Blockly.Blocks['aframeevent_collision'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Run when I touch ")
+        .appendField(new Blockly.FieldDropdown(get_all_objects), "ID");
+    this.setNextStatement(true, null);
+    this.setColour(40);
+    this.setTooltip("Runs when this object touches another.");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.JavaScript['aframeevent_collision'] = function(block) {
+  var dropdown_id = block.getFieldValue('ID');
+  return `var event = arguments[0]; if(event.detail.body.el.id === event.detail.target.el.id || event.detail.body.el.id !== '${dropdown_id}') return;\n`;
+};

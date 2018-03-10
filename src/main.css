@@ -30,6 +30,10 @@ body > .gutter {
     cursor: n-resize;
 }
 
+#right-view {
+    overflow-y: auto;
+}
+
 #right-view > div {
     min-height: 100vh;
 }
@@ -111,3 +115,10 @@ body > .gutter {
     padding: 0;
 }
 
+.a-canvas {
+    z-index: 10000;
+}
+
+.a-enter-vr {
+    z-index: 10001;
+}
