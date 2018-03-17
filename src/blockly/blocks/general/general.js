@@ -22,7 +22,7 @@ Blockly.JavaScript['variables_set'] = function(block) {
   // Variable setter.
   var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
     Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
-  var varName = 'self.vars.'+Blockly.JavaScript.variableDB_.getName(
+  var varName = 'self.vars'+Blockly.JavaScript.variableDB_.getName(
     block.getFieldValue('VAR'), Blockly.Variables.VARIABLE_CATEGORY_NAME);
   return varName + ' = ' + argument0 + ';\n';
 };
@@ -70,7 +70,7 @@ Blockly.JavaScript['text_async_prompt'] = function(block) {
   var ctx = {
     msg: Blockly.JavaScript.valueToCode(block, 'MSG', Blockly.JavaScript.ORDER_NONE) || '\'\'',
     type: block.getFieldValue('TYPE'),
-    var: block.getFieldValue('VAR'),
+    var: Blockly.JavaScript.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.VARIABLE_CATEGORY_NAME),
     id: block.id
   };
   ctx.isNum = ctx.type === 'number';

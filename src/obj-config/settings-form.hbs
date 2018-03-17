@@ -25,38 +25,39 @@
         <div class="shape-settings">
             <h3>Shape Settings</h3>
             <div class="row selectShapeWrap">
-                <div class="input-field col s12 m4">
-                    <select class="selectShape">
+                <!--<div class="input-field col s12 m4">-->
+                <div class="col s12 m4">
+                    <label for="selectShape-{{id}}">Object Shape</label>
+                    <select id="selectShape-{{id}}" class="selectShape browser-default">
                         <option value="" disabled selected>Choose a shape</option>
                         <option value="box">Box</option>
                         <option value="sphere">Ball</option>
                         <option value="cylinder">Can</option>
                     </select>
-                    <label>Object Shape</label>
                 </div>
             </div>
             <div class="row inputDiameterWrap">
                 <div class="input-field col s12 m4">
-                    <input value="1" type="number" class="inputDiameter">
-                    <label for="first_name">Diameter (Circle Size)</label>
+                    <input id="inputDiameter-{{id}}" value="1" type="number" class="inputDiameter" min="0" step="0.1">
+                    <label for="inputDiameter-{{id}}" class="active">Diameter (Circle Size)</label>
                 </div>
             </div>
             <div class="row inputHeightWrap">
                 <div class="input-field col s12 m4">
-                    <input value="1" type="number" class="inputHeight">
-                    <label for="last_name">Height ( Up/Down )</label>
+                    <input id="inputHeight-{{id}}" value="1" type="number" class="inputHeight" min="0" step="0.1">
+                    <label for="inputHeight-{{id}}" class="active">Height ( Up/Down )</label>
                 </div>
             </div>
             <div class="row inputWidthWrap">
                 <div class="input-field col s12 m4">
-                    <input value="1" type="number" class="inputWidth">
-                    <label>Width ( Left/Right )</label>
+                    <input id="inputWidth-{{id}}" value="1" type="number" class="inputWidth" min="0" step="0.1">
+                    <label for="inputWidth-{{id}}" class="active">Width ( Left/Right )</label>
                 </div>
             </div>
             <div class="row inputDepthWrap">
                 <div class="input-field col s12 m4">
-                    <input value="1" type="number" class="inputDepth">
-                    <label>Depth ( Forwards/Backwards )</label>
+                    <input id="inputDepth-{{id}}" value="1" type="number" class="inputDepth" min="0" step="0.1">
+                    <label for="inputDepth-{{id}}" class="active">Depth ( Forwards/Backwards )</label>
                 </div>
             </div>
         </div>

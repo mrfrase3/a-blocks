@@ -18,7 +18,11 @@ AFRAME.registerComponent('scene-panel', {
     $('#scene-col-'+this.data.type).prepend(
       '<a href="#" class="collection-item" data-type="env" id="scene-panel-col-'+this.id+'"><i class="fa fa-cube"></i> '+this.data.name+'</a>'
     );
+
+    let visible = this.$sceneTab.is(':visible');
+    if(!visible) this.$sceneTab.show();
     previews[this.id] = new ObjPreview($('#scene-panel-card-'+this.id+' .obj-preview').get(0), this.el);
+    if(!visible) this.$sceneTab.hide();
 
     $('#scene-panel-card-'+this.id+' .card-image, #scene-panel-col-'+this.id).click(function(e){
       e.preventDefault();
@@ -70,6 +74,7 @@ AFRAME.registerComponent('scene-panel', {
     previews[this.id].remove();
     delete previews[this.id];
     $('#scene-panel-card-'+this.id).parent().remove();
+    $('#scene-panel-col-'+this.id).remove();
   },
 
   tick: function(time,delta){
@@ -91,11 +96,15 @@ $(document).ready(function(){
   };
   window.addEventListener('resize', onresize, false);
   window.splitEvents.onDrag.push(onresize);
-  onresize();
+
   $tabs.tabs({
     //swipeable: true,
     onShow: onresize
   });
+
+  onresize();
+
+  setTimeout(()=>$tabs.trigger('resize'), 100);
 
   $('.add-obj').click(function(e){
     let id = Math.random().toString(16).substr(2);

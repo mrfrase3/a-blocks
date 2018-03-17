@@ -122,3 +122,20 @@ body > .gutter {
 .a-enter-vr {
     z-index: 10001;
 }
+
+.tab.save-load {
+    cursor: pointer;
+    float: right;
+}
+
+.tab:not(.save-load) {
+    float: left;
+}
+
+.save-load:hover {
+    color: grey;
+}
+
+.save-load .fa {
+    padding: 0 12px;
+}

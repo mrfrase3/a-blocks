@@ -56,7 +56,13 @@ AFRAME.registerComponent('blockly', {
   loadFromDom: function(ws){
     this.wsDom = ws;
     ws = Blockly.Xml.textToDom(ws);
-    Blockly.Xml.domToWorkspace(ws, this.workspace);
+    if(this.$blocklyDiv.is(':visible')){
+      Blockly.Xml.domToWorkspace(ws, this.workspace);
+    } else {
+      this.nextResize = () => {
+        Blockly.Xml.domToWorkspace(ws, this.workspace);
+      };
+    }
   },
 
   saveToDom: function(){
@@ -83,6 +89,10 @@ AFRAME.registerComponent('blockly', {
     this.blocklyDiv.style.height = this.blocklyArea.offsetHeight + 'px';
 
     Blockly.svgResize(this.workspace);
+    if(this.nextResize){
+      this.nextResize();
+      this.nextResize = undefined;
+    }
   },
 
   compile: function(){

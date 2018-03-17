@@ -18,6 +18,7 @@ AFRAME.registerComponent('obj-config', {
     this.$mainArea = $('#right-view');
     this.$configDiv = $(configTemplate(this));
     this.$mainArea.append(this.$configDiv);
+    this.$configDiv
 
     this.$toggleVis = $('#settings-'+this.id+' .toggle-vis');
     this.$toggleVis.change(function(){
@@ -46,7 +47,7 @@ AFRAME.registerComponent('obj-config', {
     this.$configDiv.find('.shape-settings input').keyup(function(){self.setGeom()});
     this.$configDiv.find('.shape-settings input').change(function(){self.setGeom()});
     this.$configDiv.find('.shape-settings select').change(function(){self.setGeom()});
-    this.$configDiv.find('.shape-settings select').material_select();
+    //this.$configDiv.find('.shape-settings select').material_select();
     this.$configDiv.find('.obj-tabs').tabs();
 
     this.shapeInputs = {
@@ -89,9 +90,10 @@ AFRAME.registerComponent('obj-config', {
   setGeom: function(){
     this.lastGeom = this.lastGeom || {};
     let diff = false;
-    let primTrans = {Box: 'box', Can: 'cylinder', Ball: 'sphere'};
-    console.log(this.shapeInputs.shape.val());
-    let prim = primTrans[this.shapeInputs.shape.val()];
+    //let primTrans = {Box: 'box', Can: 'cylinder', Ball: 'sphere'};
+    //console.log(this.shapeInputs.shape.val());
+    //let prim = primTrans[this.shapeInputs.shape.val()];
+    let prim = this.shapeInputs.realShape.val();
     let data = {primitive: prim};
     if(this.lastGeom.primitive !== prim) diff = true;
     if(['sphere', 'cylinder', 'circle', 'dodecahedron', 'octahedron', 'tetrahedron'].indexOf(prim) !== -1){
@@ -118,23 +120,26 @@ AFRAME.registerComponent('obj-config', {
 
   updateGeom: function(data){
     let prim = data.primitive;
+    
     this.shapeInputs.realShape.val(prim);
+    //this.shapeInputs.realShape.find('option').prop('selected', false);
+    //this.shapeInputs.realShape.find('option[value="'+prim+'"]').prop('selected', true);
     //this.shapeInputs.realShape.material_select('destroy');
     //this.shapeInputs.realShape.material_select();
     this.shapeWraps.all.hide();
-    if(data.radius){
+    if(typeof data.radius === 'number'){
       this.shapeWraps.radius.show();
       this.shapeInputs.radius.val(data.radius*2);
     }
-    if(data.height){
+    if(typeof data.height === 'number'){
       this.shapeWraps.height.show();
       this.shapeInputs.height.val(data.height);
     }
-    if(data.width){
+    if(typeof data.width === 'number'){
       this.shapeWraps.width.show();
       this.shapeInputs.width.val(data.width);
     }
-    if(data.depth){
+    if(typeof data.depth === 'number'){
       this.shapeWraps.depth.show();
       this.shapeInputs.depth.val(data.depth);
     }

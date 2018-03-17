@@ -6,10 +6,25 @@
   if(dir === 'L' || dir === 'R' || dir === 'Y') rot.y {{#if rotRelative}}+{{/if}}= degrees;
   if(dir === 'U' || dir === 'D' || dir === 'X') rot.x {{#if rotRelative}}+{{/if}}= degrees;
   if(dir === 'B' || dir === 'F' || dir === 'Z') rot.z {{#if rotRelative}}+{{/if}}= degrees;
+  rot.x = rot.x % 360;
+  rot.y = rot.y % 360;
+  rot.z = rot.z % 360;
 
-  if(self.el.hasAttribute('dynamic-body')){
+  /*if(self.el.hasAttribute('dynamic-body')){
     self.el.body.quaternion.setFromEuler(rot.x % 360, rot.y % 360, rot.z % 360);
   } else {
     self.el.setAttribute('rotation', rot.x % 360 + ' ' + rot.y % 360 + ' ' + rot.z % 360);
+  }*/
+  self.el.object3D.rotation.set(
+    THREE.Math.degToRad(rot.x),
+    THREE.Math.degToRad(rot.y),
+    THREE.Math.degToRad(rot.z)
+  );
+  if(self.el.hasAttribute('dynamic-body')){
+    self.el.body.quaternion.setFromEuler(
+      self.el.object3D.rotation.x,
+      self.el.object3D.rotation.y,
+      self.el.object3D.rotation.z
+    );
   }
 }).apply(self);

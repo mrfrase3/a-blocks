@@ -14,21 +14,27 @@ AFRAME.registerComponent('custom-events', {
   },
 
   tick: function(time,delta){
+    this.isDynam = this.el.hasAttribute('dynamic-body');
     if(this.el.components.visible.data !== this.lastVis){
       this.lastVis = this.el.components.visible.data;
       this.el.dispatchEvent(new CustomEvent('toggleVisible', { detail: this.lastVis }));
     }
-    if(this.el.hasAttribute('dynamic-body') !== this.lastGrav){
+    if(this.isDynam !== this.lastGrav){
       this.lastGrav = !this.lastGrav;
       this.el.dispatchEvent(new CustomEvent('toggleGravity', { detail: this.lastGrav }));
     }
+    /*if(this.isDynam){
+      this.el.setAttribute('rotation', this.el.object3D.rotation.toVector3());
+    }*/
     let geom = JSON.stringify(this.el.components.geometry.data);
     if(this.lastGeom !== geom){
       if(this.el.components.geometry.oldData){
-        let physType = this.el.hasAttribute('dynamic-body') ? 'dynamic-body' : 'static-body';
-        let physData = this.el.components[physType].data;
-        this.el.removeAttribute(physType);
-        this.el.setAttribute(physType, physData);
+        let physType = this.isDynam ? 'dynamic-body' : 'static-body';
+        if(this.el.components[physType]){
+          let physData = this.el.components[physType].data;
+          this.el.removeAttribute(physType);
+          this.el.setAttribute(physType, physData);
+        }
       }
       this.lastGeom = geom;
       this.el.dispatchEvent(new CustomEvent('updateGeometry', { detail: this.el.components.geometry.data }));

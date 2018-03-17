@@ -65,7 +65,7 @@ export class ObjPreview{
     let ratio = 9/16;
     this.canvas.style.width = '100%';
     this.SCREEN_WIDTH  = this.canvas.offsetWidth;
-    this.SCREEN_HEIGHT = this.SCREEN_WIDTH*ratio;
+    this.SCREEN_HEIGHT = Math.floor(this.SCREEN_WIDTH*ratio);
     this.canvas.style.height = this.SCREEN_HEIGHT+'px';
     this.canvas.setAttribute('width', this.SCREEN_WIDTH);
     this.canvas.setAttribute('height', this.SCREEN_HEIGHT);
@@ -75,7 +75,7 @@ export class ObjPreview{
   animate(){
     requestAnimationFrame( ()=>this.animate() );
     //don't render if not visible, visible code taken from jquery
-    if(!( this.canvas.offsetWidth || this.canvas.offsetHeight || this.canvas.getClientRects().length )) return;
+    if( !( this.canvas.offsetWidth || this.canvas.offsetHeight || this.canvas.getClientRects().length )) return;
     this.renderer.render( this.scene, this.camera );
     let time = Date.now();
     if(time - this.lastRot > 30){

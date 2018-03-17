@@ -1,6 +1,7 @@
 require('./main.css');
 
 require('./split-init.js');
+require('./save-load.js');
 require('./aframe/aframe-init.js');
 require('./obj-config/obj-config-init.js');
 require('./scene-panel/scene-panel-init.js');
