@@ -106,6 +106,8 @@ $(document).ready(function(){
 
   setTimeout(()=>$tabs.trigger('resize'), 100);
 
+  $('.save-load, .start-stop').tooltip();
+
   $('.add-obj').click(function(e){
     let id = Math.random().toString(16).substr(2);
     let $entity = $('<a-entity id="'+id+'" geometry="primitive: box;" scene-panel="name:New Object;" blockly static-body obj-config custom-events></a-entity>');

@@ -2,6 +2,8 @@
     <category web-class="toolbox-name" name="{{name}}" disabled="true"></category>
     <sep></sep>
     <category id="catEvents" colour="40" name="Events">
+        <block type="aframeevent_start"></block>
+        <block type="aframeevent_stop"></block>
         <block type="aframeevent_tick"></block>
         <block type="aframeevent_interval"></block>
         <block type="time_async_wait">

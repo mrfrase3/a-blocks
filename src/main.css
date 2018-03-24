@@ -123,19 +123,49 @@ body > .gutter {
     z-index: 10001;
 }
 
-.tab.save-load {
-    cursor: pointer;
-    float: right;
+.tabs.scene-tabs .tab {
+    float: left;
 }
 
-.tab:not(.save-load) {
-    float: left;
+.tab.save-load,
+.tab.start-stop {
+    float: right!important;
+}
+
+.save-load,
+.start-stop {
+    cursor: pointer!important;
 }
 
 .save-load:hover {
     color: grey;
 }
 
-.save-load .fa {
+.save-load .fa,
+.start-stop .fa {
     padding: 0 12px;
+}
+
+.start-stop.stop {
+    color: darkred;
+    fill: darkred;
+}
+
+.start-stop.stop:hover {
+    color: red;
+    fill: red;
+}
+
+.start-stop.start {
+    color: green;
+    fill: green;
+}
+
+.start-stop.start:hover {
+    color: lightgreen;
+    fill: lightgreen;
+}
+
+svg text.blocklyText {
+   font-family: FontAwesome, sans-serif;
 }

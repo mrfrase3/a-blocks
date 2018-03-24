@@ -13,10 +13,13 @@ AFRAME.registerComponent('code-exec',{
     if(this.data) this.eval(this.data);
     let self = this;
     this.el.addEventListener('collide', function (e) {/*console.log(e);*/self.trigger('aframeevent_collision', [e]);});
+    this.el.addEventListener('codeStart', function () {self.trigger('aframeevent_start');});
+    this.el.addEventListener('codeStop', function () {self.trigger('aframeevent_stop');});
   },
 
   update: function(){
     if(this.data) this.eval(this.data);
+    this.el.dispatchEvent(new CustomEvent('codeLoaded', { detail: this.data }));
   },
 
   eval: function(codes){

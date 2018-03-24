@@ -11,6 +11,21 @@ AFRAME.registerComponent('custom-events', {
 
     this.el.dispatchEvent(new CustomEvent('toggleVisible', { detail: this.lastVis }));
     this.el.dispatchEvent(new CustomEvent('toggleGravity', { detail: this.lastGrav }));
+
+    this.el.addEventListener('codeLoaded', function () {
+      $('.start-stop').off('click');
+      $('.start-stop.start').click(()=>{
+        $('a-scene *[custom-events]').each(function(){
+          $(this).get(0).dispatchEvent(new CustomEvent('codeStart'));
+        });
+      });
+
+      $('.start-stop.stop').click(()=>{
+        $('a-scene *[custom-events]').each(function(){
+          $(this).get(0).dispatchEvent(new CustomEvent('codeStop'));
+        });
+      });
+    });
   },
 
   tick: function(time,delta){

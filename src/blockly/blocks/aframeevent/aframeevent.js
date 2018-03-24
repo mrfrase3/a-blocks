@@ -56,7 +56,7 @@ const get_all_objects = function() {
 Blockly.Blocks['aframeevent_collision'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Run when I touch ")
+        .appendField("Run when this object touches ")
         .appendField(new Blockly.FieldDropdown(get_all_objects), "ID");
     this.setNextStatement(true, null);
     this.setColour(40);
@@ -68,4 +68,38 @@ Blockly.Blocks['aframeevent_collision'] = {
 Blockly.JavaScript['aframeevent_collision'] = function(block) {
   var dropdown_id = block.getFieldValue('ID');
   return `var event = arguments[0]; if(event.detail.body.el.id === event.detail.target.el.id || event.detail.body.el.id !== '${dropdown_id}') return;\n`;
+};
+
+Blockly.Blocks['aframeevent_start'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Run when")
+        .appendField(new Blockly.FieldLabel("\uf024", "start-stop start"))
+        .appendField("is clicked");
+    this.setNextStatement(true, null);
+    this.setColour(40);
+    this.setTooltip("Runs when the scene is started.");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.JavaScript['aframeevent_start'] = function(block) {
+  return ``;
+};
+
+Blockly.Blocks['aframeevent_stop'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Run when")
+        .appendField(new Blockly.FieldLabel("\uf04d", "start-stop stop"))
+        .appendField("is clicked");
+    this.setNextStatement(true, null);
+    this.setColour(40);
+    this.setTooltip("Runs when the scene is started.");
+    this.setHelpUrl("");
+  }
+};
+
+Blockly.JavaScript['aframeevent_stop'] = function(block) {
+  return ``;
 };
